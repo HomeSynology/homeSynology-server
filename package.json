@@ -12,6 +12,7 @@
     "bluebird": "^3.5.0",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
+    "socket.io": "^2.0.3",
     "koa-convert": "^1.2.0",
     "koa-cors": "0.0.16",
     "koa-logger": "^3.0.1",
@@ -19,6 +20,7 @@
     "koa-router": "^7.2.1",
     "koa2-cors": "^2.0.3",
     "level": "^1.7.0",
-    "synoapi": "^1.0.9"
+    "synoapi": "^1.0.9",
+    "parse-torrent": "^5.8.3"
   }
 }

@@ -15,12 +15,15 @@ const ds = new DownloadStation(config)
 async function getEmit(emit, on) {
   try {
     const socket = getConnSocket(emit.synoKey)
-    return new Promise(function (resolve, reject) {
-      socket.on(on, function (data) {
-        resolve(data)
+    if(socket){
+      return new Promise(function (resolve, reject) {
+        socket.on(on, function (data) {
+          resolve(data)
+        })
+        socket.emit(emit.emit, emit.data)
       })
-      socket.emit(emit.emit, emit.data)
-    })
+    }
+    console.error('没有对应的socket连接',emit.synoKey)
   } catch (err) {
     console.log(err)
   }
