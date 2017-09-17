@@ -12,5 +12,5 @@ RUN cd /var/www/homeSynology-server
 RUN npm install
 
 EXPOSE 8080
-CMD ["node", "./app.js"]
+CMD ["/var/www/homeSyonology-server/bin/www"]
 
