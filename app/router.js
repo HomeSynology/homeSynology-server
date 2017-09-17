@@ -15,15 +15,19 @@ const ds = new DownloadStation(config)
 async function getEmit(emit, on) {
   try {
     const socket = getConnSocket(emit.synoKey)
-    if(socket){
-      return new Promise(function (resolve, reject) {
+
+    return new Promise(function (resolve, reject) {
+      if (socket) {
         socket.on(on, function (data) {
           resolve(data)
         })
         socket.emit(emit.emit, emit.data)
-      })
-    }
-    console.error('没有对应的socket连接',emit.synoKey)
+      } else {
+        console.log(getConnSocket())
+        reject({success: false, error: {code: 4004, msg: '没有对应的socket连接'}})
+      }
+    })
+    console.error('没有对应的socket连接', emit.synoKey)
   } catch (err) {
     console.log(err)
   }
@@ -37,13 +41,17 @@ router.get('*', async function (ctx, next) {
   const request = ctx.request
   console.log('request', request)
 
-  const result = await getEmit({
-    emit: 'getapi',
-    data: request,
-    synoKey: ctx.query.synoKey
-    // synoKey: 'brpoper'
-  }, 'getapiback')
-  ctx.body = result
+  try {
+    const result = await getEmit({
+      emit: 'getapi',
+      data: request,
+      synoKey: ctx.query.synoKey
+      // synoKey: 'brpoper'
+    }, 'getapiback')
+    ctx.body = result
+  } catch (err) {
+    ctx.body = err
+  }
 })
 
 

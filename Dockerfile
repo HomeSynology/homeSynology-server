@@ -8,9 +8,10 @@ RUN apt-get install -y git
 
 ADD https://api.github.com/repos/HomeSynology/homeSynology-server/git/refs/heads/rel version.json
 RUN git clone -b rel https://github.com/HomeSynology/homeSynology-server.git /var/www/homeSynology-server
-RUN cd /var/www/homeSynology-server
+WORKDIR /var/www/homeSynology-server
 RUN npm install
+RUN ls node_modules
 
 EXPOSE 8080
-CMD ["/var/www/homeSyonology-server/bin/www"]
+CMD ["/var/www/homeSynology-server/bin/www"]
 

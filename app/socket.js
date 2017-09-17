@@ -15,6 +15,9 @@ io.on('connection', function (socket) {
 })
 
 const getConnSocket = (synoKey) => {
+  if(!synoKey){
+    return socketIDs
+  }
   return socketIDs[synoKey]
 }
 
