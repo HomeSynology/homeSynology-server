@@ -1,12 +1,16 @@
 FROM node:latest
 
-RUN mkdir -p /usr/src/www
+MAINTAINER Jesusalexander <brpoper@gmail.com>
 
-WORKDIR /usr/src/www
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update
+RUN apt-get install -y git
 
-COPY . /usr/src/www
-
-WORKDIR /usr/src/server
-
+ADD https://api.github.com/repos/HomeSynology/homeSynology-server/git/refs/heads/rel version.json
+RUN git clone -b rel https://github.com/HomeSynology/homeSynology-server.git /var/www/homeSynology-server
+RUN cd /var/www/homeSynology-server
 RUN npm install
+
+EXPOSE 8080
+CMD ["node", "./app.js"]
 
