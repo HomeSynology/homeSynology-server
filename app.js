@@ -1,4 +1,4 @@
-const Koa = require('koa');
+const Koa = require('Koa');
 const logger = require('koa-logger');
 const convert = require('koa-convert');
 const cross = require('koa-cors');

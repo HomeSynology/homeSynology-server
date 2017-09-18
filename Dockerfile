@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:8.2.1
 
 MAINTAINER Jesusalexander <brpoper@gmail.com>
 
@@ -10,7 +10,8 @@ ADD https://api.github.com/repos/HomeSynology/homeSynology-server/git/refs/heads
 RUN git clone -b rel https://github.com/HomeSynology/homeSynology-server.git /var/www/homeSynology-server
 WORKDIR /var/www/homeSynology-server
 RUN npm install
-RUN ls node_modules
+RUN cat app.js
+
 
 EXPOSE 8080
 CMD ["/var/www/homeSynology-server/bin/www"]

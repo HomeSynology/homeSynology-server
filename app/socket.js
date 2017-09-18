@@ -1,4 +1,4 @@
-const Koa = require('Koa');
+const Koa = require('koa');
 const {promisify} = require('util')
 
 const server = require('http').createServer((request, response) => {
